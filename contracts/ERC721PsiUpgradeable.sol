@@ -23,7 +23,7 @@ import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "solidity-bits/contracts/BitMaps.sol";
+import "solady/src/utils/LibBitmap.sol";
 
 
 contract ERC721PsiUpgradeable is Initializable, ContextUpgradeable, 
@@ -31,16 +31,16 @@ contract ERC721PsiUpgradeable is Initializable, ContextUpgradeable,
     
     using AddressUpgradeable for address;
     using StringsUpgradeable for uint256;
-    using BitMaps for BitMaps.BitMap;
+    using LibBitmap for LibBitmap.Bitmap;
 
-    BitMaps.BitMap private _batchHead;
+    LibBitmap.Bitmap private _batchHead;
 
     string private _name;
     string private _symbol;
 
     // Mapping from token ID to owner address
     mapping(uint256 => address) internal _owners;
-    uint256 private _currentIndex;
+    uint256 internal _currentIndex;
 
     mapping(uint256 => address) private _tokenApprovals;
     mapping(address => mapping(address => bool)) private _operatorApprovals;
@@ -494,7 +494,7 @@ contract ERC721PsiUpgradeable is Initializable, ContextUpgradeable,
     }
 
     function _getBatchHead(uint256 tokenId) internal view returns (uint256 tokenIdBatchHead) {
-        tokenIdBatchHead = _batchHead.scanForward(tokenId); 
+        tokenIdBatchHead = _batchHead.findLastSet(tokenId); 
     }
 
     
