@@ -385,7 +385,7 @@ contract ERC721Psi is Context, ERC165, IERC721, IERC721Metadata {
         _currentIndex += quantity;
         _owners[nextTokenId] = to;
         _batchHead.set(nextTokenId);
-             
+        
         uint256 toMasked;
         uint256 end = nextTokenId + quantity;
 
