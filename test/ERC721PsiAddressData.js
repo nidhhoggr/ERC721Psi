@@ -228,8 +228,25 @@ describe('ERC721PsiAddressData', function () {
       this.receiver = await this.ERC721Receiver.deploy(RECEIVER_MAGIC_VALUE);
     });
 
+
+    describe('mint', function () {
+      it('successfully safely mints a single token', async function () {
+        const mintTx = await this.ERC721Psi['mint(address,uint256)'](this.receiver.address, 1);
+        await expect(mintTx).to.emit(this.ERC721Psi, 'Transfer').withArgs(ZERO_ADDRESS, this.receiver.address, 0);
+        expect(await this.ERC721Psi.ownerOf(0)).to.equal(this.receiver.address);
+      });
+
+      it('successfully safely mints multiple tokens', async function () {
+        const mintTx = await this.ERC721Psi['mint(address,uint256)'](this.receiver.address, 5);
+        for (let tokenId = 0; tokenId < 5; tokenId++) {
+          await expect(mintTx).to.emit(this.ERC721Psi, 'Transfer').withArgs(ZERO_ADDRESS, this.receiver.address, tokenId);
+          expect(await this.ERC721Psi.ownerOf(tokenId)).to.equal(this.receiver.address);
+        }
+      });
+    });
+
     describe('safeMint', function () {
-      it('successfully mints a single token', async function () {
+      it('successfully safely mints a single token', async function () {
         const mintTx = await this.ERC721Psi['safeMint(address,uint256)'](this.receiver.address, 1);
         await expect(mintTx).to.emit(this.ERC721Psi, 'Transfer').withArgs(ZERO_ADDRESS, this.receiver.address, 0);
         await expect(mintTx)
@@ -238,7 +255,7 @@ describe('ERC721PsiAddressData', function () {
         expect(await this.ERC721Psi.ownerOf(0)).to.equal(this.receiver.address);
       });
 
-      it('successfully mints multiple tokens', async function () {
+      it('successfully safely mints multiple tokens', async function () {
         const mintTx = await this.ERC721Psi['safeMint(address,uint256)'](this.receiver.address, 5);
         for (let tokenId = 0; tokenId < 5; tokenId++) {
           await expect(mintTx).to.emit(this.ERC721Psi, 'Transfer').withArgs(ZERO_ADDRESS, this.receiver.address, tokenId);

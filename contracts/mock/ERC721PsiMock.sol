@@ -21,6 +21,10 @@ contract ERC721PsiMock is ERC721Psi {
         return _exists(tokenId);
     }
 
+    function mint(address to, uint256 quantity) public {
+        _mint(to, quantity);
+    }
+
     function safeMint(address to, uint256 quantity) public {
         _safeMint(to, quantity);
     }
