@@ -29,19 +29,35 @@ async function main() {
     ERC721Enumerable = await ERC721Enumerable.deploy("ERC721Enumerable", "ERC721Enumerable");
     ERC721Enumerable = await ERC721Enumerable.deployed();
     
-    // Mint at least one token before to initialize most of the parameters, 
+    // Safe Mint at least one token before to initialize most of the parameters, 
     // so the result fits the real world scenerio better
     await ERC721Psi['safeMint(address,uint256)'](user1.address, 1);
     await ERC721A['safeMint(address,uint256)'](user1.address, 1);
     await ERC721Enumerable['safeMintBatch(address,uint256)'](user1.address, 1);
 
     console.log(i);
-    let erc721Psi_mint = await ERC721Psi['safeMint(address,uint256)'](deployer.address, i);
+    let erc721Psi_safemint = await ERC721Psi['safeMint(address,uint256)'](deployer.address, i);
+    console.log("ERC721Psi Safe Mint", (await erc721Psi_safemint.wait()).gasUsed.toString());
+    let erc721a_safemint = await ERC721A['safeMint(address,uint256)'](deployer.address, i);
+    console.log("ERC721A Safe Mint", (await erc721a_safemint.wait()).gasUsed.toString());
+    let erc721enumerable_safemint = await ERC721Enumerable['safeMintBatch(address,uint256)'](deployer.address, i);
+    console.log("ERC721Enumerable Safe Mint", (await erc721enumerable_safemint.wait()).gasUsed.toString());
+
+
+    // Mint at least one token before to initialize most of the parameters, 
+    // so the result fits the real world scenerio better
+    await ERC721Psi['mint(address,uint256)'](user1.address, 1);
+    await ERC721A['mint(address,uint256)'](user1.address, 1);
+    await ERC721Enumerable['mintBatch(address,uint256)'](user1.address, 1);
+
+    console.log(i);
+    let erc721Psi_mint = await ERC721Psi['mint(address,uint256)'](deployer.address, i);
     console.log("ERC721Psi Mint", (await erc721Psi_mint.wait()).gasUsed.toString());
-    let erc721a_mint = await ERC721A['safeMint(address,uint256)'](deployer.address, i);
+    let erc721a_mint = await ERC721A['mint(address,uint256)'](deployer.address, i);
     console.log("ERC721A Mint", (await erc721a_mint.wait()).gasUsed.toString());
-    let erc721enumerable_mint = await ERC721Enumerable['safeMintBatch(address,uint256)'](deployer.address, i);
+    let erc721enumerable_mint = await ERC721Enumerable['mintBatch(address,uint256)'](deployer.address, i);
     console.log("ERC721Enumerable Mint", (await erc721enumerable_mint.wait()).gasUsed.toString());
+
   }
 }
 

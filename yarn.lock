@@ -3932,12 +3932,10 @@ env-paths@^2.2.0:
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
   integrity sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==
 
-erc721a@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/erc721a/-/erc721a-2.2.0.tgz#299dd56eaf2a6cd3df95f6fe877888f7e5ffbe10"
-  integrity sha512-RPBH2P7NpDHTIn0Ix1+mvpq0yvszeQUc7vNazkMwf5JAbbvgjUV93CFTqtIGXbN6lwu9vQMoqXE0BgW5EqPKZQ==
-  dependencies:
-    "@openzeppelin/contracts" "^4.4.2"
+erc721a@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/erc721a/-/erc721a-4.2.3.tgz#ca6469b0e54afb0f614272c2147dc4cb49ff223f"
+  integrity sha512-0deF0hOOK1XI1Vxv3NKDh2E9sgzRlENuOoexjXRJIRfYCsLlqi9ejl2RF6Wcd9HfH0ldqC03wleQ2WDjxoOUvA==
 
 err-code@^2.0.2:
   version "2.0.3"

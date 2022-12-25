@@ -14,6 +14,17 @@ contract ERC721EnumerableMock is ERC721Enumerable {
         return _exists(tokenId);
     }
 
+    function mint(address to, uint256 quantity) public {
+        _mint(to, quantity);
+    }
+
+    function mintBatch(address to, uint256 quantity) public {
+        uint256 _totalSupply = totalSupply();
+        for(uint256 i = _totalSupply; i < (_totalSupply + quantity); i++) {
+            _mint(to, i);
+        }
+    }
+
     function safeMint(address to, uint256 tokenId) public {
         _safeMint(to, tokenId);
     }
