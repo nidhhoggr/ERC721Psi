@@ -1,6 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-truffle5");
 require('@openzeppelin/hardhat-upgrades');
+require("hardhat-gas-reporter");
 
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -28,6 +29,10 @@ module.exports = {
       // Alchemy: 550 million
       // Infura: 10x (300 Million)
     }
+  },
+  gasReporter: {
+    enabled: (process.env.REPORT_GAS) ? true : false,
+    outputFile: process.env.REPORT_GAS_FILE
   },
   solidity: {compilers: [
     {
