@@ -124,8 +124,7 @@ contract ERC721PsiDiamondUpgradeable is ERC721PsiInitializable, IERC721Psi {
     }
 
     /**
-     * @dev See {IERC721-ownerOf}.
-     */
+     * @dev See {IERC721-ownerOf}.     */
     function ownerOf(uint256 tokenId)
         public
         view
@@ -410,7 +409,6 @@ contract ERC721PsiDiamondUpgradeable is ERC721PsiInitializable, IERC721Psi {
         _afterTokenTransfers(address(0), to, nextTokenId, quantity);
     }
 
-
     /**
      * @dev Transfers `tokenId` from `from` to `to`.
      *  As opposed to {transferFrom}, this imposes no restrictions on msg.sender.
@@ -427,16 +425,17 @@ contract ERC721PsiDiamondUpgradeable is ERC721PsiInitializable, IERC721Psi {
         address to,
         uint256 tokenId
     ) internal virtual {
+        if (to == address(0)) revert TransferToZeroAddress();
 
-        (address owner, uint256 tokenIdBatchHead) = _ownerAndBatchHeadOf(tokenId);
+        ERC721PsiStorage.Layout storage layout = ERC721PsiStorage.layout();
+        uint256 tokenIdBatchHead = layout._batchHead.scanForward(tokenId);
+        address owner = layout._owners[tokenIdBatchHead];
 
         if (owner != from) revert TransferFromIncorrectOwner();
 
         if (!_isApprovedOrOwner(_msgSenderERC721Psi(), tokenId)) {
             revert TransferCallerNotOwnerNorApproved();
         }
-
-        if (to == address(0)) revert TransferToZeroAddress();
 
         _beforeTokenTransfers(from, to, tokenId, 1);
 
@@ -445,16 +444,16 @@ contract ERC721PsiDiamondUpgradeable is ERC721PsiInitializable, IERC721Psi {
 
         uint256 subsequentTokenId = tokenId + 1;
 
-        if(!ERC721PsiStorage.layout()._batchHead.get(subsequentTokenId) &&  
+        if(!layout._batchHead.get(subsequentTokenId) &&  
             subsequentTokenId < _nextTokenId()
         ) {
-            ERC721PsiStorage.layout()._owners[subsequentTokenId] = from;
-            ERC721PsiStorage.layout()._batchHead.set(subsequentTokenId);
+            layout._owners[subsequentTokenId] = from;
+            layout._batchHead.set(subsequentTokenId);
         }
 
-        ERC721PsiStorage.layout()._owners[tokenId] = to;
+        layout._owners[tokenId] = to;
         if(tokenId != tokenIdBatchHead) {
-            ERC721PsiStorage.layout()._batchHead.set(tokenId);
+            layout._batchHead.set(tokenId);
         }
 
         emit Transfer(from, to, tokenId);
