@@ -2,12 +2,13 @@
 
 pragma solidity ^0.8.0;
 
-import '../ERC721PsiUpgradeable.sol';
+import '../ERC721PsiDiamondUpgradeable.sol';
+import '../storage/ERC721PsiInitializable.sol';
 import "hardhat/console.sol";
 
 
-contract ERC721PsiMockUpgradeable is ERC721PsiUpgradeable {
-
+contract ERC721PsiDiamondMockUpgradeable is ERC721PsiInitializable, ERC721PsiDiamondUpgradeable {
+    
     function _startTokenId() internal pure override returns (uint256) {
         return 0;
     }

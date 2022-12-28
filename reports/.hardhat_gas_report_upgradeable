@@ -1,0 +1,80 @@
+
+  ERC721PsiUpgradeable
+    with no minted tokens
+      ✓ has 0 totalSupply
+    with minted tokens
+      ✓ has 6 totalSupply
+      exists
+        ✓ verifies valid tokens
+        ✓ verifies invalid tokens
+      balanceOf
+        ✓ returns the amount for a given address
+        ✓ throws an exception for the 0 address
+      ownerOf
+        ✓ returns the right owner
+        ✓ reverts for an invalid token
+      approve
+        ✓ sets approval for the target address
+        ✓ rejects an invalid token owner
+        ✓ rejects an unapproved caller
+        ✓ does not get approved for invalid tokens
+      setApprovalForAll
+        ✓ sets approval for all properly
+        ✓ sets rejects approvals for non msg senders
+      test transfer functionality
+        successful transfers
+          transferFrom
+            ✓ transfers the ownership of the given token ID to the given address
+            ✓ emits a Transfer event
+            ✓ clears the approval for the token ID
+            ✓ emits an Approval event
+            ✓ adjusts owners balances
+          safeTransferFrom
+            ✓ transfers the ownership of the given token ID to the given address
+            ✓ emits a Transfer event
+            ✓ clears the approval for the token ID
+            ✓ emits an Approval event
+            ✓ adjusts owners balances
+            ✓ validates ERC721Received
+        unsuccessful transfers
+          transferFrom
+            ✓ rejects unapproved transfer
+            ✓ rejects transfer from incorrect owner
+            ✓ rejects transfer to zero address
+          safeTransferFrom
+            ✓ rejects unapproved transfer
+            ✓ rejects transfer from incorrect owner
+            ✓ rejects transfer to zero address
+    mint
+      safeMint
+        ✓ successfully mints a single token
+        ✓ successfully mints multiple tokens
+        ✓ rejects mints to the zero address
+        ✓ requires quantity to be greater 0
+
+·----------------------------------------------------------|---------------------------|-------------|------------------------------·
+|                   [90mSolc version: 0.8.17[39m                   ·  [90mOptimizer enabled: true[39m  ·  [90mRuns: 200[39m  ·  [90mBlock limit: 120000000 gas[39m  │
+···························································|···························|·············|·······························
+|  [32m[1mMethods[22m[39m                                                                                                                          │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [1mContract[22m                          ·  [1mMethod[22m             ·  [32mMin[39m        ·  [32mMax[39m        ·  [32mAvg[39m        ·  [1m# calls[22m      ·  [1meur (avg)[22m   │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [90mERC721PsiMockUpgradeableWithInit[39m  ·  approve            ·          -  ·          -  ·      54501  ·            [90m1[39m  ·           [32m[90m-[32m[39m  │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [90mERC721PsiMockUpgradeableWithInit[39m  ·  safeMint           ·      [36m61638[39m  ·     [31m124271[39m  ·      79200  ·          [90m104[39m  ·           [32m[90m-[32m[39m  │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [90mERC721PsiMockUpgradeableWithInit[39m  ·  safeTransferFrom   ·          -  ·          -  ·      74869  ·            [90m9[39m  ·           [32m[90m-[32m[39m  │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [90mERC721PsiMockUpgradeableWithInit[39m  ·  setApprovalForAll  ·          -  ·          -  ·      46119  ·           [90m17[39m  ·           [32m[90m-[32m[39m  │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [90mERC721PsiMockUpgradeableWithInit[39m  ·  transferFrom       ·          -  ·          -  ·      67355  ·            [90m7[39m  ·           [32m[90m-[32m[39m  │
+·····································|·····················|·············|·············|·············|···············|···············
+|  [32m[1mDeployments[22m[39m                                             ·                                         ·  [1m% of limit[22m   ·              │
+···························································|·············|·············|·············|···············|···············
+|  ERC721PsiMockUpgradeableWithInit                        ·          -  ·          -  ·    1649520  ·        [90m1.4 %[39m  ·           [32m[90m-[32m[39m  │
+···························································|·············|·············|·············|···············|···············
+|  ERC721ReceiverMock                                      ·          -  ·          -  ·     195069  ·        [90m0.2 %[39m  ·           [32m[90m-[32m[39m  │
+·----------------------------------------------------------|-------------|-------------|-------------|---------------|--------------·
+
+  35 passing (8s)
+

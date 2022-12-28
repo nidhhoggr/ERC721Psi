@@ -10,7 +10,7 @@ const GAS_MAGIC_VALUE = 20000;
 describe('ERC721PsiUpgradeable', function () {
   beforeEach(async function () {
     this.ERC721Receiver = await ethers.getContractFactory('ERC721ReceiverMock');
-    this.ERC721Psi = await hre.ethers.getContractFactory("ERC721PsiMockUpgradeableWithInit");
+    this.ERC721Psi = await hre.ethers.getContractFactory("ERC721PsiDiamondMockUpgradeableWithInit");
     this.ERC721Psi = await this.ERC721Psi.deploy("ERC721Psi", "ERC721Psi");
     this.ERC721Psi = await this.ERC721Psi.deployed();
   });
