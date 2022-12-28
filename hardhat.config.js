@@ -1,6 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-truffle5");
 require('@openzeppelin/hardhat-upgrades');
+require("@nomicfoundation/hardhat-chai-matchers");
 require("hardhat-gas-reporter");
 
 

@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@chainlink/contracts": "^0.4.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
     "@openzeppelin/contracts": "^4.4.2",
     "@openzeppelin/contracts-upgradeable": "^4.5.1",
     "solidity-bits": "^0.3.2"
@@ -22,7 +23,7 @@
     "erc721a": "^4.2.3",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.0.0",
-    "hardhat": "^2.8.3",
+    "hardhat": "^2.9.4",
     "hardhat-gas-reporter": "^1.0.9",
     "npm": "^8.6.0"
   }
